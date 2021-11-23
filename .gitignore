@@ -127,5 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
 # Data files-per privacy statement
-.csv
+*.csv
