@@ -1,7 +1,6 @@
 import csv
 import pandas
-import matplotlib.pyplot as plt
-import numpy as np
+import plotly.graph_objects as go
 
 #load datasets
 SurveyData=pandas.read_csv('SurveyData.csv')
@@ -21,25 +20,25 @@ WebFreq=SurveyData.groupby("How often do you currently visit the library website
 #Faculty Responses
 FacLibFreq=FacData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
 FacWebFreq=FacData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
-print ('Faculty In-Person Use:'+str(FacLibFreq))
-print ('Faculty Website Use:'+str(FacWebFreq))
+#print ('Faculty In-Person Use:'+str(FacLibFreq))
+#print ('Faculty Website Use:'+str(FacWebFreq))
 
 #Student Responses
 StudentLibFreq=StudentData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
 StudentWebFreq=StudentData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
-print('Student In-Person Use:'+str(StudentLibFreq))
-print('Student Website Use:'+str(StudentWebFreq))
+#print('Student In-Person Use:'+str(StudentLibFreq))
+#print('Student Website Use:'+str(StudentWebFreq))
 
 #Undergrad Responses
 UGLibFreq=UGData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
 UGWebFreq=UGData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
-print('Undergrad In-Person Use:'+str(UGLibFreq))
-print('Undergrad Website Use:'+str(UGWebFreq))
+#print('Undergrad In-Person Use:'+str(UGLibFreq))
+#print('Undergrad Website Use:'+str(UGWebFreq))
 
 #Graduate Responses
 GradLibFreq=GradData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
 GradWebFreq=GradData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
-print('Grad Student In-Person Use:'+str(GradLibFreq))
-print('Grad Student Website Use:'+str(GradWebFreq))
+#print('Grad Student In-Person Use:'+str(GradLibFreq))
+#print('Grad Student Website Use:'+str(GradWebFreq))
 
 #Return results as stacked, grouped bar graph
