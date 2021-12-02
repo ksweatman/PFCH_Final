@@ -28,3 +28,15 @@ Other=pd.Series(SurveyData['What other library websites do you visit? - Selected
 print(Other)
 NA=pd.Series(SurveyData['What other library websites do you visit? - Selected Choice']).str.extractall("(None/Not Applicable)").count()
 print(NA)
+
+#Site Ratings
+
+Clarity_Rating=SurveyData.groupby("Rate the following aspects of the website - Information Clarity")['Rate the following aspects of the website - Information Clarity'].count()
+Clarity_Rating_Perc=(Clarity_Rating/len(SurveyData))*100
+print(Clarity_Rating_Perc)
+#print(Clarity_Rating.mean)
+Nav_Rating=SurveyData.groupby("Rate the following aspects of the website - Navigability")['Rate the following aspects of the website - Navigability'].count()
+
+GetHelp_Rating=SurveyData.groupby("Rate the following aspects of the website - Getting Help")['Rate the following aspects of the website - Getting Help'].count()
+
+Rating=SurveyData.groupby("Rate the following aspects of the website - Overall Experience")['Rate the following aspects of the website - Overall Experience'].count()
