@@ -98,7 +98,7 @@ fig, ax = plt.subplots(figsize=(10,10))
 
 ax.set_ylabel('Number of Occurrences')
 ax.set_xlabel('Word')
-plt.title('Top 25 Words in Survey Responses to  "What feature(s) do you wish our website had?"')
+plt.title('Top 25 Words in Survey Responses to "What feature(s) do you wish our website had?"')
 plt.grid()
 
 bar_plot = sns.barplot(x=all_fdist.index, y=all_fdist.values, ax=ax)
@@ -119,6 +119,7 @@ wordcloud = WordCloud(width = 800, height = 800,random_state=1,
  
 #WordCloud image                      
 plt.figure(figsize = (10, 10), facecolor = None)
+plt.title('Survey Responses to "What feature(s) do you wish our website had?"')
 plt.imshow(wordcloud)
 plt.axis("off")
 plt.tight_layout(pad = 0)

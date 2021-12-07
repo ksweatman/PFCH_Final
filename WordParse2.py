@@ -8,6 +8,7 @@ import collections, operator
 import csv
 from nltk.util import ngrams
 import seaborn as sns
+from wordcloud import WordCloud
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -109,3 +110,17 @@ plt.savefig("sitelikes.png")
 n = 25
 print(text.collocations(n))
 
+#plot wordcloud
+
+wordcloud = WordCloud(width = 800, height = 800,random_state=1,
+    background_color ='white',colormap='gist_heat',
+    min_font_size = 10).generate(str(filter_words))
+ 
+#WordCloud image                      
+plt.figure(figsize = (10, 10), facecolor = None)
+plt.title('Survey Responses to "What do you like about the library website?"')
+plt.imshow(wordcloud)
+plt.axis("off")
+plt.tight_layout(pad = 0)
+ 
+plt.savefig("likecloud.png")
