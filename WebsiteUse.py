@@ -3,7 +3,9 @@ import pandas as pd
 from pandas import Series, DataFrame
 import matplotlib.pyplot as plt
 import numpy as np
-import plotly.graph_objects as go
+import collections, operator
+import csv
+import seaborn as sns
 
 #load datasets
 SurveyData=pd.read_csv('SurveyData.csv')
@@ -13,41 +15,41 @@ GradData=pd.read_csv('Graduate.csv')
 UGData=pd.read_csv('Undergraduate.csv')
 
 WebUse1=pd.Series(SurveyData['Web Uses']).str.extractall("(To find out what technology is available for me to use)").count()
-print(WebUse1)
+#print(WebUse1)
 WebUse2=pd.Series(SurveyData['Web Uses']).str.extractall("(To find library hours)").count()
-print(WebUse2)
+#print(WebUse2)
 WebUse3=pd.Series(SurveyData['Web Uses']).str.extractall("(To reserve study space)").count()
-print(WebUse3)
+#print(WebUse3)
 WebUse4=pd.Series(SurveyData['Web Uses']).str.extractall("(To check on my loans)").count()
-print(WebUse4)
+#print(WebUse4)
 WebUse5=pd.Series(SurveyData['Web Uses']).str.extractall("(To get help from a library staff member)").count()
-print(WebUse5)
+#print(WebUse5)
 WebUse6=pd.Series(SurveyData['Web Uses']).str.extractall("(To find research materials)").count()
-print(WebUse6)
+#print(WebUse6)
 WebUse7=pd.Series(SurveyData['Web Uses']).str.extractall("(To find out about library locations)").count()
-print(WebUse7)
+#print(WebUse7)
 WebUse8=pd.Series(SurveyData['Web Uses']).str.extractall("(Other)").count()
-print(WebUse8)
+#print(WebUse8)
 
-""" #bar graph
+uses=pd.Series(np.ndarray(int['To find out what technology is available for me to use', 'To find library hours', 'To reserve study space','To check on my loans','To get help from a library staff member','To find research materials','To find out about library locations','Other']).tolist())
+users=pd.Series(np.ndarray(int[WebUse1,WebUse2,WebUse3,WebUse4,WebUse5,WebUse6,WebUse7,WebUse8]).tolist())
+
+df=pd.concat([uses,users],axis=1)
+
+print(df)
+
 #matplotlib
+fig, ax = plt.subplots(figsize=(10,10))
 
-data = [WebUse1,WebUse2,WebUse3,WebUse4,WebUse5,WebUse6,WebUse7,WebUse8]
-labels = ['To find out what technology is available for me to use', 'To find library hours', 'To reserve study space','To check on my loans','To get help from a library staff member','To find research materials','To find out about library locations','Other']
-def f(x):
-    return np.int(x)
-f2 = np.vectorize(f)
-x = np.arange([WebUse1,WebUse2,WebUse3,WebUse4,WebUse5,WebUse6,WebUse7,WebUse8])
-plt.plot(x, f2(x))
-plt.xticks(range(len(data)), labels)
-plt.xlabel('Website Uses')
-plt.ylabel('# of Respondents')
+ax.set_ylabel('Number of Respondents')
+ax.set_xlabel('Uses')
 plt.title('Why do you use the library website?')
-plt.bar(range(len(data)), data) 
+plt.grid()
+plt.bar(df,height=[],colors='Reds')
+plt.savefig("webuses.png")
 
-plt.show()
 
-#plotly go
+"""#plotly go
 uses=['To find out what technology is available for me to use', 'To find library hours', 'To reserve study space','To check on my loans','To get help from a library staff member','To find research materials','To find out about library locations','Other']
 fig = go.Figure([go.Bar(
     x=uses, 
