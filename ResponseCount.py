@@ -1,6 +1,8 @@
 import csv
 import pandas
-import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import numpy as np
+#import plotly.graph_objects as go
 
 #return number of faculty and student responses
 SurveyData=pandas.read_csv('SurveyData.csv')
@@ -17,10 +19,35 @@ Grad_num=StudentCounts[1]
 UG_num=StudentCounts[2]
 
 #create pie chart of respondent types
+
+plt.style.use('_mpl-gallery-nogrid')
+
+x = [Faculty_num,UG_num,Grad_num,CE_num]
 labels=['Faculty','Undergraduate Students','Graduate Students','Continuing Education Students']
-values=[Faculty_num,UG_num,Grad_num,CE_num]
+colors = plt.get_cmap('Reds')(np.linspace(0.2, 0.7, len(x)))
+
+
+fig, ax = plt.subplots(figsize=(10,10))
+ax.pie(x, colors=colors, labels=labels,autopct='%.1f%%', 
+    wedgeprops={'linewidth': 3.0, 'edgecolor': 'white'},
+    textprops={'size': 'x-large'},
+    startangle=90)
+
+"""ax.legend(labels,x,
+          title="Respondents",
+          loc="center left",
+          bbox_to_anchor=(1, 0, 0.5, 1))"""
+          
+ax.set_title('Survey Responses', fontsize=18, color='black')
+plt.tight_layout()
+plt.savefig("surveyresponses.png")
+
+
+
+"""plotly code
+values=[]
 colors=['9d0000','e82e21','ff8664','ffb792']
 fig=go.Figure(data=[go.Pie(labels=labels,values=values)])
 fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
                   marker=dict(colors=colors))
-fig.show()
+fig.show()"""

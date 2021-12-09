@@ -1,6 +1,6 @@
 import csv
 import pandas as pd
-
+import numpy as np
 #load datasets
 SurveyData=pd.read_csv('SurveyData.csv')
 FacData=pd.read_csv('Faculty.csv')
@@ -33,9 +33,20 @@ print(NA)
 
 Clarity_Rating=SurveyData.groupby("Rate the following aspects of the website - Information Clarity")['Rate the following aspects of the website - Information Clarity'].count()
 Clarity_Rating_Perc=(Clarity_Rating/len(SurveyData))*100
+print(Clarity_Rating_Perc)
 Nav_Rating=SurveyData.groupby("Rate the following aspects of the website - Navigability")['Rate the following aspects of the website - Navigability'].count()
 Nav_Rating_Perc=(Nav_Rating/len(SurveyData))*100
+print(Nav_Rating_Perc)
 GetHelp_Rating=SurveyData.groupby("Rate the following aspects of the website - Getting Help")['Rate the following aspects of the website - Getting Help'].count()
 GetHelp_Rating_Perc=(GetHelp_Rating/len(SurveyData))*100
+print(GetHelp_Rating_Perc)
 Rating=SurveyData.groupby("Rate the following aspects of the website - Overall Experience")['Rate the following aspects of the website - Overall Experience'].count()
 Rating_Perc=(Rating/len(SurveyData))*100
+print(Rating_Perc)
+
+Categories=pd.Series(np.ndarray([]).tolist())
+users=pd.Series(np.ndarray(int).tolist())
+
+df=pd.concat([Categories,users],axis=1)
+
+print(df)

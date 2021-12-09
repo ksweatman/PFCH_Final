@@ -1,11 +1,13 @@
 import csv
+from math import nan
+from re import U
 import pandas as pd
 from pandas import Series, DataFrame
 import matplotlib.pyplot as plt
 import numpy as np
 import collections, operator
-import csv
 import seaborn as sns
+
 
 #load datasets
 SurveyData=pd.read_csv('SurveyData.csv')
@@ -14,45 +16,47 @@ StudentData=pd.read_csv('Student.csv')
 GradData=pd.read_csv('Graduate.csv')
 UGData=pd.read_csv('Undergraduate.csv')
 
-WebUse1=pd.Series(SurveyData['Web Uses']).str.extractall("(To find out what technology is available for me to use)").count()
-#print(WebUse1)
-WebUse2=pd.Series(SurveyData['Web Uses']).str.extractall("(To find library hours)").count()
-#print(WebUse2)
-WebUse3=pd.Series(SurveyData['Web Uses']).str.extractall("(To reserve study space)").count()
-#print(WebUse3)
-WebUse4=pd.Series(SurveyData['Web Uses']).str.extractall("(To check on my loans)").count()
-#print(WebUse4)
-WebUse5=pd.Series(SurveyData['Web Uses']).str.extractall("(To get help from a library staff member)").count()
-#print(WebUse5)
-WebUse6=pd.Series(SurveyData['Web Uses']).str.extractall("(To find research materials)").count()
-#print(WebUse6)
-WebUse7=pd.Series(SurveyData['Web Uses']).str.extractall("(To find out about library locations)").count()
-#print(WebUse7)
-WebUse8=pd.Series(SurveyData['Web Uses']).str.extractall("(Other)").count()
-#print(WebUse8)
+Use=SurveyData['Web Uses'].tolist()
 
-uses=pd.Series(np.ndarray(int['To find out what technology is available for me to use', 'To find library hours', 'To reserve study space','To check on my loans','To get help from a library staff member','To find research materials','To find out about library locations','Other']).tolist())
-users=pd.Series(np.ndarray(int[WebUse1,WebUse2,WebUse3,WebUse4,WebUse5,WebUse6,WebUse7,WebUse8]).tolist())
+Use1=0
+Use2=0
+Use3=0
+Use4=0
+Use5=0
+Use6=0
+Use7=0
+Use8=0
+for row in Use: 
+   if type(row) != float:
+       if 'To find out what technology is available for me to use' in row:  
+           Use1=Use1+1
+       if 'To find library hours' in row:
+           Use2=Use2+1
+       if'To reserve study space'in row:
+           Use3=Use3+1
+       if 'To check on my loans' in row:
+           Use4=Use4+1
+       if 'To get help from a library staff member' in row:
+           Use5=Use5+1
+       if 'To find research materials' in row:
+           Use6=Use6+1
+       if 'To find out about library locations' in row:
+           Use7=Use7+1
+       if 'Other' in row:
+           Use8=Use8+1
 
-df=pd.concat([uses,users],axis=1)
 
-print(df)
+x=['To find out what technology is available for me to use', 'To find library hours', 'To reserve study space','To check on my loans','To get help from a library staff member','To find research materials','To find out about library locations','Other']
+y=[Use1,Use2,Use3,Use4,Use5,Use6,Use7,Use8]
 
-#matplotlib
 fig, ax = plt.subplots(figsize=(10,10))
 
 ax.set_ylabel('Number of Respondents')
 ax.set_xlabel('Uses')
 plt.title('Why do you use the library website?')
 plt.grid()
-plt.bar(df,height=[],colors='Reds')
+bar_plot = sns.barplot(x, y, ax=ax)
+ax.set_ylim(ymin=0)
+plt.xticks(rotation=45)
+plt.tight_layout()
 plt.savefig("webuses.png")
-
-
-"""#plotly go
-uses=['To find out what technology is available for me to use', 'To find library hours', 'To reserve study space','To check on my loans','To get help from a library staff member','To find research materials','To find out about library locations','Other']
-fig = go.Figure([go.Bar(
-    x=uses, 
-    y=[WebUse1,WebUse2,WebUse3,WebUse4,WebUse5,WebUse6,WebUse7,WebUse8],
-    )])
-fig.show()"""
