@@ -46,17 +46,127 @@ for row in Use:
            Use8=Use8+1
 
 
-x=['To find out what technology is available for me to use', 'To find library hours', 'To reserve study space','To check on my loans','To get help from a library staff member','To find research materials','To find out about library locations','Other']
-y=[Use1,Use2,Use3,Use4,Use5,Use6,Use7,Use8]
+y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
+x=[Use1,Use2,Use3,Use4,Use5,Use6,Use7,Use8]
 
 fig, ax = plt.subplots(figsize=(10,10))
 
-ax.set_ylabel('Number of Respondents')
-ax.set_xlabel('Uses')
+ax.set_xlabel('Number of Respondents')
+ax.set_ylabel('Uses')
 plt.title('Why do you use the library website?')
 plt.grid()
-bar_plot = sns.barplot(x, y, ax=ax)
-ax.set_ylim(ymin=0)
-plt.xticks(rotation=45)
+bar_plot = sns.barplot(x, y, ax=ax,orient='h')
+ax.set_xlim(xmin=0)
+plt.xticks
 plt.tight_layout()
 plt.savefig("webuses.png")
+
+#Faculty Dataset
+FacUse=FacData['Web Uses'].tolist()
+
+FacUse1=0
+FacUse2=0
+FacUse3=0
+FacUse4=0
+FacUse5=0
+FacUse6=0
+FacUse7=0
+FacUse8=0
+for row in Use: 
+   if type(row) != float:
+       if 'To find out what technology is available for me to use' in row:  
+           FacUse1=FacUse1+1
+       if 'To find library hours' in row:
+           FacUse2=FacUse2+1
+       if'To reserve study space'in row:
+           FacUse3=FacUse3+1
+       if 'To check on my loans' in row:
+           FacUse4=FacUse4+1
+       if 'To get help from a library staff member' in row:
+           FacUse5=FacUse5+1
+       if 'To find research materials' in row:
+           FacUse6=FacUse6+1
+       if 'To find out about library locations' in row:
+           FacUse7=FacUse7+1
+       if 'Other' in row:
+           FacUse8=FacUse8+1
+
+
+y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
+x=[FacUse1,FacUse2,FacUse3,FacUse4,FacUse5,FacUse6,FacUse7,FacUse8]
+
+fig, ax = plt.subplots(figsize=(10,10))
+
+ax.set_xlabel('Number of Respondents')
+ax.set_ylabel('Uses')
+plt.title('Faculty Responses: Why do you use the library website?')
+plt.grid()
+bar_plot = sns.barplot(x, y, ax=ax,orient='h',color="Blue")
+ax.set_xlim(xmin=0)
+plt.xticks
+plt.tight_layout()
+plt.savefig("webfacuses.png")
+
+#Student Dataset
+
+StudentUse=StudentData['Web Uses'].tolist()
+
+StudentUse1=0
+StudentUse2=0
+StudentUse3=0
+StudentUse4=0
+StudentUse5=0
+StudentUse6=0
+StudentUse7=0
+StudentUse8=0
+for row in StudentUse: 
+   if type(row) != float:
+       if 'To find out what technology is available for me to use' in row:  
+           StudentUse1=StudentUse1+1
+       if 'To find library hours' in row:
+           StudentUse2=StudentUse2+1
+       if'To reserve study space'in row:
+           StudentUse3=StudentUse3+1
+       if 'To check on my loans' in row:
+           StudentUse4=StudentUse4+1
+       if 'To get help from a library staff member' in row:
+           StudentUse5=StudentUse5+1
+       if 'To find research materials' in row:
+           StudentUse6=StudentUse6+1
+       if 'To find out about library locations' in row:
+           StudentUse7=StudentUse7+1
+       if 'Other' in row:
+           StudentUse8=StudentUse8+1
+
+
+y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
+x=[StudentUse1,StudentUse2,StudentUse3,StudentUse4,StudentUse5,StudentUse6,StudentUse7,StudentUse8]
+
+fig, ax = plt.subplots(figsize=(10,10))
+
+ax.set_xlabel('Number of Respondents')
+ax.set_ylabel('Uses')
+plt.title('Student Responses: Why do you use the library website?')
+plt.grid()
+bar_plot = sns.barplot(x, y, ax=ax,orient='h',color="Red")
+ax.set_xlim(xmin=0)
+plt.xticks
+plt.tight_layout()
+plt.savefig("webstudentuses.png")
+
+"""#Grouped Bar Plot
+y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
+x=[FacUse1,StudentUse1,FacUse2,StudentUse2,FacUse3,StudentUse3,FacUse4,StudentUse4,FacUse5,StudentUse5,FacUse6,StudentUse6,FacUse7,StudentUse7,FacUse8,StudentUse8]
+colors=['Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red']
+#Respondent=['Faculty','Student']
+fig, ax = plt.subplots(figsize=(10,10))
+
+ax.set_xlabel('Number of Respondents')
+ax.set_ylabel('Uses')
+plt.title('Student Responses: Why do you use the library website?')
+plt.grid()
+bar_plot = sns.catplot(x, y, ax=ax,orient='h',color=colors,aspect=.5)
+ax.set_xlim(xmin=0)
+plt.xticks
+plt.tight_layout()
+plt.savefig("webusegroup.png")"""
