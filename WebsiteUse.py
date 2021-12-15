@@ -155,9 +155,8 @@ plt.tight_layout()
 plt.savefig("webstudentuses.png")
 
 """#Grouped Bar Plot
-y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
+y=['Available Technology-Faculty', 'Available Technology-Students','Library Hours-Faculty','Library Hours-Students','Reserve Study Space-Faculty','Reserve Study Space-Students','Check my Loans-Faculty','Check my Loans-Students','Get Help from Library Staff-Faculty','Get Help from Library Staff-Students','Find Research Materials-Faculty','Find Research Materials-Students','Library Locations-Faculty','Library Locations-Students','Other-Faculty','Other-Students']
 x=[FacUse1,StudentUse1,FacUse2,StudentUse2,FacUse3,StudentUse3,FacUse4,StudentUse4,FacUse5,StudentUse5,FacUse6,StudentUse6,FacUse7,StudentUse7,FacUse8,StudentUse8]
-colors=['Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red']
 #Respondent=['Faculty','Student']
 fig, ax = plt.subplots(figsize=(10,10))
 
@@ -165,7 +164,7 @@ ax.set_xlabel('Number of Respondents')
 ax.set_ylabel('Uses')
 plt.title('Student Responses: Why do you use the library website?')
 plt.grid()
-bar_plot = sns.catplot(x, y, ax=ax,orient='h',color=colors,aspect=.5)
+bar_plot = sns.barplot(x, y, ax=ax,orient='h',color=['Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red'])
 ax.set_xlim(xmin=0)
 plt.xticks
 plt.tight_layout()
