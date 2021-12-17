@@ -41,13 +41,3 @@ ax.pie(x, colors=colors, labels=labels,autopct='%.1f%%',
 ax.set_title('Survey Responses', fontsize=18, color='black')
 plt.tight_layout()
 plt.savefig("surveyresponses.png")
-
-
-
-"""plotly code
-values=[]
-colors=['9d0000','e82e21','ff8664','ffb792']
-fig=go.Figure(data=[go.Pie(labels=labels,values=values)])
-fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
-                  marker=dict(colors=colors))
-fig.show()"""

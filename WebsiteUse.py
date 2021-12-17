@@ -46,7 +46,7 @@ for row in Use:
            Use8=Use8+1
 
 
-y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
+"""y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
 x=[Use1,Use2,Use3,Use4,Use5,Use6,Use7,Use8]
 
 fig, ax = plt.subplots(figsize=(10,10))
@@ -59,7 +59,7 @@ bar_plot = sns.barplot(x, y, ax=ax,orient='h')
 ax.set_xlim(xmin=0)
 plt.xticks
 plt.tight_layout()
-plt.savefig("webuses.png")
+plt.savefig("webuses.png")"""
 
 #Faculty Dataset
 FacUse=FacData['Web Uses'].tolist()
@@ -92,7 +92,7 @@ for row in Use:
            FacUse8=FacUse8+1
 
 
-y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
+"""y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
 x=[FacUse1,FacUse2,FacUse3,FacUse4,FacUse5,FacUse6,FacUse7,FacUse8]
 
 fig, ax = plt.subplots(figsize=(10,10))
@@ -105,7 +105,7 @@ bar_plot = sns.barplot(x, y, ax=ax,orient='h',color="Blue")
 ax.set_xlim(xmin=0)
 plt.xticks
 plt.tight_layout()
-plt.savefig("webfacuses.png")
+plt.savefig("webfacuses.png")"""
 
 #Student Dataset
 
@@ -138,34 +138,44 @@ for row in StudentUse:
        if 'Other' in row:
            StudentUse8=StudentUse8+1
 
-
-y=['Available Technology', 'Library Hours', 'Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
-x=[StudentUse1,StudentUse2,StudentUse3,StudentUse4,StudentUse5,StudentUse6,StudentUse7,StudentUse8]
-
+"""Uses=['Available Technology','Library Hours','Reserve Study Space','Check my Loans','Get Help from Library Staff','Find Research Materials','Library Locations','Other']
+Responses=[StudentUse1,StudentUse2,StudentUse3,StudentUse4,StudentUse5,StudentUse6,StudentUse7,StudentUse8]
 fig, ax = plt.subplots(figsize=(10,10))
 
 ax.set_xlabel('Number of Respondents')
 ax.set_ylabel('Uses')
 plt.title('Student Responses: Why do you use the library website?')
 plt.grid()
-bar_plot = sns.barplot(x, y, ax=ax,orient='h',color="Red")
+bar_plot = sns.barplot(x=Responses, y=Uses, ax=ax,orient='h',color="Red")
 ax.set_xlim(xmin=0)
 plt.xticks
 plt.tight_layout()
-plt.savefig("webstudentuses.png")
+plt.savefig("webstudentuses.png")"""
 
-"""#Grouped Bar Plot
-y=['Available Technology-Faculty', 'Available Technology-Students','Library Hours-Faculty','Library Hours-Students','Reserve Study Space-Faculty','Reserve Study Space-Students','Check my Loans-Faculty','Check my Loans-Students','Get Help from Library Staff-Faculty','Get Help from Library Staff-Students','Find Research Materials-Faculty','Find Research Materials-Students','Library Locations-Faculty','Library Locations-Students','Other-Faculty','Other-Students']
-x=[FacUse1,StudentUse1,FacUse2,StudentUse2,FacUse3,StudentUse3,FacUse4,StudentUse4,FacUse5,StudentUse5,FacUse6,StudentUse6,FacUse7,StudentUse7,FacUse8,StudentUse8]
-#Respondent=['Faculty','Student']
+# Create DataFrame
+data = {'Uses':['Available Technology','Available Technology','Library Hours','Library Hours','Reserve Study Space','Reserve Study Space','Check my Loans','Check my Loans','Get Help from Library Staff','Get Help from Library Staff','Find Research Materials','Find Research Materials','Library Locations','Library Locations','Other','Other'],
+        'Respondent':['Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students'],
+        'Responses':[FacUse1,StudentUse1,FacUse2,StudentUse2,FacUse3,StudentUse3,FacUse4,StudentUse4,FacUse5,StudentUse5,FacUse6,StudentUse6,FacUse7,StudentUse7,FacUse8,StudentUse8]
+}
+
+df = pd.DataFrame(data)
+df.pivot("Uses", "Respondent","Responses")
+
+#Grouped Bar Plot
+colors = ["blue", "red"]
+sns.set_palette(sns.color_palette(colors))
 fig, ax = plt.subplots(figsize=(10,10))
-
-ax.set_xlabel('Number of Respondents')
-ax.set_ylabel('Uses')
-plt.title('Student Responses: Why do you use the library website?')
 plt.grid()
-bar_plot = sns.barplot(x, y, ax=ax,orient='h',color=['Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red','Blue','Red'])
-ax.set_xlim(xmin=0)
-plt.xticks
+bar_plot = sns.barplot(
+    x="Uses", 
+    y="Responses", 
+    hue="Respondent", 
+    data=df, 
+    ci=None
+    )
+ax.set_title('Why do you use the library website?')
+ax.set_ylabel('Responses')
+ax.set_xlabel('Uses')
+plt.xticks(rotation=45)
 plt.tight_layout()
-plt.savefig("webusegroup.png")"""
+plt.savefig("webusegroup.png")

@@ -1,13 +1,19 @@
 import csv
-import pandas
-import plotly.graph_objects as go
+from math import nan
+from re import U
+import pandas as pd
+from pandas import Series, DataFrame
+import matplotlib.pyplot as plt
+import numpy as np
+import collections, operator
+import seaborn as sns
 
 #load datasets
-SurveyData=pandas.read_csv('SurveyData.csv')
-FacData=pandas.read_csv('Faculty.csv')
-StudentData=pandas.read_csv('Student.csv')
-GradData=pandas.read_csv('Graduate.csv')
-UGData=pandas.read_csv('Undergraduate.csv')
+SurveyData=pd.read_csv('SurveyData.csv')
+FacData=pd.read_csv('Faculty.csv')
+StudentData=pd.read_csv('Student.csv')
+GradData=pd.read_csv('Graduate.csv')
+UGData=pd.read_csv('Undergraduate.csv')
 
 #return responses to first 2 survey questions
 
@@ -125,6 +131,33 @@ for row in StudentLibFreqs:
        if 'Never' in row:
            StudentLibFreq7=StudentLibFreq7+1
 
+
+# Create DataFrame
+data = {'Use Frequency':['Multiple visits per day','Multiple visits per day','Once a day','Once a day','2-3 times per week','2-3 times per week','Once a week','Once a week','2-3 times per month','2-3 times per month','Once per semester','Once per semester','Never','Never'],
+        'Use Type':['Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person'],
+        'Responses':[StudentWebFreq1,StudentLibFreq1,StudentWebFreq2,StudentLibFreq2,StudentWebFreq3,StudentLibFreq3,StudentWebFreq4,StudentLibFreq4,StudentWebFreq5,StudentLibFreq5,StudentWebFreq6,StudentLibFreq6,StudentWebFreq7,StudentLibFreq7]
+}
+
+df = pd.DataFrame(data)
+df.pivot("Use Frequency", "Use Type","Responses")
+
+#Grouped Bar Plot
+fig, ax = plt.subplots(figsize=(10,10))
+plt.grid()
+bar_plot = sns.barplot(
+    x="Use Frequency", 
+    y="Responses", 
+    hue="Use Type", 
+    data=df, 
+    ci=None
+    )
+ax.set_title('Student Responses: How Often do you Use Library Resources?')
+ax.set_ylabel('Responses')
+ax.set_xlabel('Use Frequency')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("studentusefreq.png")
+
 #Faculty Responses
 
 FacLibFreqs=FacData['Library Use Frequency'].tolist()
@@ -155,7 +188,6 @@ for row in FacWebFreqs:
        if 'Never' in row:
            FacWebFreq7=FacWebFreq7+1
 
-
 FacLibFreq1=0
 FacLibFreq2=0
 FacLibFreq3=0
@@ -170,7 +202,7 @@ for row in FacLibFreqs:
            FacLibFreq1=FacLibFreq1+1
        if 'Once a day' in row:
            FacLibFreq2=FacLibFreq2+1
-       if'2-3 times per week'in row:
+       if '2-3 times per week'in row:
            FacLibFreq3=FacLibFreq3+1
        if 'Once a week' in row:
            FacLibFreq4=FacLibFreq4+1
@@ -181,14 +213,46 @@ for row in FacLibFreqs:
        if 'Never' in row:
            FacLibFreq7=FacLibFreq7+1
 
+# Create DataFrame
+data = {'Use Frequency':['Multiple visits per day','Multiple visits per day','Once a day','Once a day','2-3 times per week','2-3 times per week','Once a week','Once a week','2-3 times per month','2-3 times per month','Once per semester','Once per semester','Never','Never'],
+        'Use Type':['Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person'],
+        'Responses':[FacWebFreq1,FacLibFreq1,FacWebFreq2,FacLibFreq2,FacWebFreq3,FacLibFreq3,FacWebFreq4,FacLibFreq4,FacWebFreq5,FacLibFreq5,FacWebFreq6,FacLibFreq6,FacWebFreq7,FacLibFreq7]
+}
 
+df = pd.DataFrame(data)
+df.pivot("Use Frequency", "Use Type","Responses")
 
-#Undergrad Responses
+#Grouped Bar Plot
+fig, ax = plt.subplots(figsize=(10,10))
+plt.grid()
+bar_plot = sns.barplot(
+    x="Use Frequency", 
+    y="Responses", 
+    hue="Use Type", 
+    data=df, 
+    ci=None
+    )
+ax.set_title('Faculty Responses: How Often do you Use Library Resources?')
+ax.set_ylabel('Responses')
+ax.set_xlabel('Use Frequency')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("facusefreq.png")
 
+#Overall plot
+# Create DataFrame
+data = {'Use Frequency':['Multiple visits per day','Multiple visits per day','Multiple visits per day','Multiple visits per day','Once a day','Once a day','Once a day','Once a day','2-3 times per week','2-3 times per week','2-3 times per week','2-3 times per week','Once a week','Once a week','Once a week','Once a week','2-3 times per month','2-3 times per month','2-3 times per month','2-3 times per month','Once per semester','Once per semester','Once per semester','Once per semester','Never','Never','Never','Never'],
+        'Use Type':['Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person','Online','In Person'],
+        'Respondent':['Faculty','Faculty','Student','Student','Faculty','Faculty','Student','Student','Faculty','Faculty','Student','Student','Faculty','Faculty','Student','Student','Faculty','Faculty','Student','Student','Faculty','Faculty','Student','Student','Faculty','Faculty','Student','Student'],
+        'Responses':[FacWebFreq1,FacLibFreq1,StudentWebFreq1,StudentLibFreq1,FacWebFreq2,FacLibFreq2,StudentWebFreq2,StudentLibFreq2,FacWebFreq3,FacLibFreq3,StudentWebFreq3,StudentLibFreq3,FacWebFreq4,FacLibFreq4,StudentWebFreq4,StudentLibFreq4,FacWebFreq5,FacLibFreq5,StudentWebFreq5,StudentLibFreq5,FacWebFreq6,FacLibFreq6,StudentWebFreq6,StudentLibFreq6,FacWebFreq7,FacLibFreq7,StudentWebFreq7,StudentLibFreq7]
+}
 
-#Graduate Responses
-
-
-#Return results as grouped bar graph
-# Library/Web Use Grouped together, graphs for faculty, then students
-# """
+df = pd.DataFrame(data)
+df.pivot(index=['Respondent','Use Type'], columns=['Use Frequency'], values=['Responses'])
+sns.catplot(x="Respondent", y="Responses",
+                 hue="Use Type", col="Use Frequency",
+                 data=df, kind="bar",
+                 height=4, aspect=.7)
+ax.set_title('Library Resource Use Frequency')
+#plt.tight_layout()
+plt.savefig("usefreq.png")
