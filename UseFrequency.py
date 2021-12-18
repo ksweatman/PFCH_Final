@@ -1,44 +1,45 @@
 import csv
-import pandas
-import plotly.graph_objects as go
+from math import nan
+from re import U
+import pandas as pd
+from pandas import Series, DataFrame
+import matplotlib.pyplot as plt
+import numpy as np
+import collections, operator
+import seaborn as sns
+
 
 #load datasets
-SurveyData=pandas.read_csv('SurveyData.csv')
-FacData=pandas.read_csv('Faculty.csv')
-StudentData=pandas.read_csv('Student.csv')
-GradData=pandas.read_csv('Graduate.csv')
-UGData=pandas.read_csv('Undergraduate.csv')
+SurveyData=pd.read_csv('SurveyData.csv')
+FacData=pd.read_csv('Faculty.csv')
+StudentData=pd.read_csv('Student.csv')
+GradData=pd.read_csv('Graduate.csv')
+UGData=pd.read_csv('Undergraduate.csv')
 
-#return responses to first 2 survey questions
+WebFreq=SurveyData['Web Use Frequency'].tolist()
 
-#Overall Responses
-LibFreq=SurveyData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
+WebUse=0
 
-WebFreq=SurveyData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
+for row in WebFreq: 
+   if type(row) != float:
+       if  row not in WebUse:
+           WebUse=WebUse+1
 
+print(WebUse)
 
-#Faculty Responses
-FacLibFreq=FacData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
-FacWebFreq=FacData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
-#print ('Faculty In-Person Use:'+str(FacLibFreq))
-#print ('Faculty Website Use:'+str(FacWebFreq))
+"""x=['To find out what technology is available for me to use', 'To find library hours', 'To reserve study space','To check on my loans','To get help from a library staff member','To find research materials','To find out about library locations','Other']
+y=[Use1,Use2,Use3,Use4,Use5,Use6,Use7,Use8]
 
-#Student Responses
-StudentLibFreq=StudentData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
-StudentWebFreq=StudentData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
-#print('Student In-Person Use:'+str(StudentLibFreq))
-#print('Student Website Use:'+str(StudentWebFreq))
+fig, ax = plt.subplots(figsize=(10,10))
 
-#Undergrad Responses
-UGLibFreq=UGData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
-UGWebFreq=UGData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
-#print('Undergrad In-Person Use:'+str(UGLibFreq))
-#print('Undergrad Website Use:'+str(UGWebFreq))
-
-#Graduate Responses
-GradLibFreq=GradData.groupby("How often do you currently visit the library in person?")['How often do you currently visit the library in person?'].count()
-GradWebFreq=GradData.groupby("How often do you currently visit the library website?")['How often do you currently visit the library website?'].count()
-#print('Grad Student In-Person Use:'+str(GradLibFreq))
-#print('Grad Student Website Use:'+str(GradWebFreq))
+ax.set_ylabel('Number of Respondents')
+ax.set_xlabel('Uses')
+plt.title('Why do you use the library website?')
+plt.grid()
+bar_plot = sns.barplot(x, y, ax=ax)
+ax.set_ylim(ymin=0)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("webuses.png")"""
 
 #Return results as stacked, grouped bar graph
