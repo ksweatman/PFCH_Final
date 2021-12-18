@@ -9,7 +9,7 @@ from numpy import spacing
 import collections, operator
 import csv
 import seaborn as sns
-from wordcloud import WordCloud
+#from wordcloud import WordCloud
 
 nltk.download('stopwords')
 
@@ -29,8 +29,6 @@ for row in data:
     corpus = corpus + row[15] + ' '
     corpus_list.append(row[15])
 
-           
-file.close()
 
 #tokenize words, convert to lowercase
 tokens = nltk.word_tokenize(corpus.lower())
@@ -111,7 +109,7 @@ plt.savefig("sitefeatures.png")
 n = 25
 print(text.collocations(n))
 
-#plot wordcloud
+"""#plot wordcloud
 
 wordcloud = WordCloud(width = 800, height = 800,random_state=1,
     background_color ='white',colormap='gist_heat',
@@ -124,7 +122,7 @@ plt.imshow(wordcloud)
 plt.axis("off")
 plt.tight_layout(pad = 0)
  
-plt.savefig("featurecloud.png")
+plt.savefig("featurecloud.png")"""
 
 # Question: "What do you like about the library's current website?" in row [13]
 
@@ -216,7 +214,7 @@ plt.savefig("sitelikes.png")
 n = 25
 print(text.collocations(n))
 
-#plot wordcloud
+"""#plot wordcloud
 
 wordcloud = WordCloud(width = 800, height = 800,random_state=1,
     background_color ='white',colormap='gist_heat',
@@ -229,4 +227,4 @@ plt.imshow(wordcloud)
 plt.axis("off")
 plt.tight_layout(pad = 0)
  
-plt.savefig("likecloud.png")
+plt.savefig("likecloud.png")"""
