@@ -2,7 +2,6 @@ import csv
 import pandas
 import matplotlib.pyplot as plt
 import numpy as np
-#import plotly.graph_objects as go
 
 #return number of faculty and student responses
 SurveyData=pandas.read_csv('SurveyData.csv')
