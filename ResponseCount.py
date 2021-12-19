@@ -1,6 +1,7 @@
 import csv
 import pandas
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import numpy as np
 
 #return number of faculty and student responses
@@ -22,21 +23,21 @@ UG_num=StudentCounts[2]
 plt.style.use('_mpl-gallery-nogrid')
 
 x = [Faculty_num,UG_num,Grad_num,CE_num]
-labels=['Faculty','Undergraduate Students','Graduate Students','Continuing Education Students']
-colors = plt.get_cmap('Reds')(np.linspace(0.2, 0.7, len(x)))
+colors = ['DarkRed','Red','Tomato','LightSalmon']
+Fac_patch = mpatches.Patch(color='DarkRed', label='Faculty')
+UG_patch = mpatches.Patch(color='Red', label='Undergraduates')
+Grad_patch = mpatches.Patch(color='Tomato', label='Graduate Students')
+CE_patch = mpatches.Patch(color='LightSalmon', label='Continuing Education Students')
 
 
 fig, ax = plt.subplots(figsize=(10,10))
-ax.pie(x, colors=colors, labels=labels,autopct='%.1f%%', 
+ax.pie(x, colors=colors, autopct='%.1f%%', 
     wedgeprops={'linewidth': 3.0, 'edgecolor': 'white'},
     textprops={'size': 'x-large'},
     startangle=90)
 
-"""ax.legend(labels,x,
-          title="Respondents",
-          loc="center left",
-          bbox_to_anchor=(1, 0, 0.5, 1))"""
-          
+
+ax.legend(handles=[Fac_patch,UG_patch,Grad_patch,CE_patch])        
 ax.set_title('Survey Responses', fontsize=18, color='black')
 plt.tight_layout()
 plt.savefig("surveyresponses.png")
