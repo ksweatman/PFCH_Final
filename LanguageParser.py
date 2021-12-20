@@ -102,7 +102,7 @@ plt.grid()
 bar_plot = sns.barplot(x=all_fdist.index, y=all_fdist.values, ax=ax)
 ax.set_ylim(ymin=0)
 plt.xticks(rotation=45)
-plt.savefig("sitefeatures.png")
+plt.savefig("Charts/sitefeatures.png")
 
 # prints top n of collocates in text (how often words appear next to one another, in pairs)
 
@@ -122,4 +122,4 @@ plt.imshow(wordcloud)
 plt.axis("off")
 plt.tight_layout(pad = 0)
 
-plt.savefig("featurecloud.png")
+plt.savefig("Charts/featurecloud.png")
