@@ -12,8 +12,7 @@ import seaborn as sns
 SurveyData=pd.read_csv('SurveyData.csv')
 FacData=pd.read_csv('Faculty.csv')
 StudentData=pd.read_csv('Student.csv')
-GradData=pd.read_csv('Graduate.csv')
-UGData=pd.read_csv('Undergraduate.csv')
+
 #return responses to first 2 survey questions
 
 #Overall Responses
@@ -557,12 +556,12 @@ plt.savefig("Charts/studentlibuses.png")
 
 # Create DataFrame
 data = {'LibUses':['Printing and Scanning', 'Printing and Scanning','Use Public or Circulating Computers','Use Public or Circulating Computers', 'Private Study Space','Private Study Space','Public Study Area','Public Study Area','Get Help from Library Staff','Get Help from Library Staff','Browse/Find Research Materials','Browse/Find Research Materials','Other','Other'],
-        'LibUseRespondent':['Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students'],
+        'Respondent':['Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students','Faculty','Students'],
         'LibUseResponses':[FacLibUse1,StudentLibUse1,FacLibUse2,StudentLibUse2,FacLibUse3,StudentLibUse3,FacLibUse4,StudentLibUse4,FacLibUse5,StudentLibUse5,FacLibUse6,StudentLibUse6,FacLibUse7,StudentLibUse7]
 }
 
 df = pd.DataFrame(data)
-df.pivot("LibUses", "LibUseRespondent","LibUseResponses")
+df.pivot("LibUses", "Respondent","LibUseResponses")
 #Grouped Bar Plot
 colors = ["blue", "red"]
 sns.set_palette(sns.color_palette(colors))
@@ -571,7 +570,7 @@ plt.grid()
 bar_plot = sns.barplot(
     x="LibUses", 
     y="LibUseResponses", 
-    hue="LibUseRespondent", 
+    hue="Respondent", 
     data=df, 
     ci=None
     )
